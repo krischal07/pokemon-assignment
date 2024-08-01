@@ -1,3 +1,12 @@
+<?php 
+  $json = file_get_contents("./data.json");
+  $data = json_decode($json,true);
+
+  // foreach($data as $element){
+  //   echo ($element);
+  // }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,7 +23,10 @@
 <body class="bg-dark">
   <div class="container">
     <div class="mt-4 mb-5 d-flex justify-content-between align-items-center">
-      <h1 class="text-white">Get your Pokemon!</h1>
+      
+      <h1 class="text-white">
+     
+      <i class="fa fa-address-card"></i> Get your Pokemon!</h1>
       <div>
         <button class="btn btn-primary">
           <i class="fa fa-sign-in"></i> Login</button>
@@ -23,18 +35,30 @@
     <table class="table table-dark">
       <thead>
         <tr>
-          <th scope="col">Image</th>
-          <th scope="col">Name</th>
-          <th scope="col">Species</th>
-          <th scope="col">Description</th>
-          <th scope="col">Weight</th>
-          <th scope="col">Height</th>
-          <th scope="col">Action</th>
+          <th scope="col"><i class="fa fa-camera-retro"></i> Image</th>
+          <th scope="col"><i class="fa fa-sort-alpha-asc"></i> Name</th>
+          <th scope="col"><i class="fas fa-dragon"></i> Species</th>
+          <th scope="col"><i class="fa fa-pencil"></i> Description</th>
+          <th scope="col"><i class="fas fa-weight"></i> Weight</th>
+          <th scope="col"><i class="fa fa-text-height"></i> Height</th>
+          <th scope="col"><i class="fas fa-eye"></i> Action</th>
         </tr>
       </thead>
       <tbody>
+          <?php foreach($data as $element):?>
+            <tr>
 
-        <!-- Write your code here -->
+              <td><img src="<?php echo $element["image"]["thumbnail"] ?>"></td>
+              <td><?php echo $element["name"]["english"]?></td>
+              <td><?php echo strtoupper($element["species"])?></td>
+              <td><?php echo $element["description"]?></td>
+              <td><?php echo $element["profile"]["weight"]?></td>
+              <td><?php echo $element["profile"]["height"]?></td>
+              <td><button class="btn btn-success"><i class="fa fa-gamepad"></i>Collect</button></td>
+              <!-- Write your code here -->
+            </tr>
+        <?php endforeach; ?>
+
       </tbody>
     </table>
 
